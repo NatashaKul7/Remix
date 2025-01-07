@@ -1,6 +1,7 @@
 import styles from "./NewNote.css";
 
 function NewNote() {
+
   return (
     <form method="post" id="note-form">
       <p>
