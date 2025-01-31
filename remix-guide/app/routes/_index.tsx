@@ -1,5 +1,5 @@
 import { type MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,9 +24,13 @@ export default function Index() {
   return (
     <div className="grid grid-cols-4 gap-3">
       {blogs.map((blog) => (
-        <div key={blog.id} className="p-3 shadow-md rounded-sm">
+        <Link
+          to={`/blogs/${blog.id}`}
+          key={blog.id}
+          className="p-3 shadow-md rounded-sm"
+        >
           {blog.body}
-        </div>
+        </Link>
       ))}
     </div>
   );
