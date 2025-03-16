@@ -6,6 +6,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+// import "./styles.css";
+import styles from "./styles.css?url";
+import Brand from "./components/Brand";
 
 export const meta = () => {
   return [
@@ -14,6 +17,14 @@ export const meta = () => {
   ];
 };
 
+export const links = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: styles,
+    },
+  ];
+};
 export function Layout({ children }) {
   return (
     <html lang="en">
@@ -25,6 +36,7 @@ export function Layout({ children }) {
       </head>
       <body>
         <NavBar />
+        <Brand />
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -39,14 +51,14 @@ export default function App() {
 
 export function NavBar() {
   return (
-    <nav>
+    <nav className="navigation">
       <ul>
         <li>
           <NavLink
             to="/"
             style={({ isActive, isPending }) => {
               return {
-                fontWeight: isActive ? "bold" : "",
+                fontWeight: isActive ? "bold" : "normal",
                 color: isActive ? "red" : "black",
               };
             }}
@@ -77,7 +89,7 @@ export function NavBar() {
               };
             }}
           >
-            Aboit
+            About
           </NavLink>
         </li>
         <li>
