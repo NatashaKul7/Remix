@@ -7,8 +7,10 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 // import "./styles.css";
+import picoCSS from "./pico.css?url";
 import styles from "./styles.css?url";
 import Brand from "./components/Brand";
+import NavBar from "./components/NavBar";
 
 export const meta = () => {
   return [
@@ -19,6 +21,10 @@ export const meta = () => {
 
 export const links = () => {
   return [
+    {
+      rel: "stylesheet",
+      href: picoCSS,
+    },
     {
       rel: "stylesheet",
       href: styles,
@@ -34,10 +40,14 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
+
       <body>
-        <NavBar />
-        <Brand />
-        {children}
+        <header>
+          <NavBar />
+          <Brand />
+        </header>
+        <main className="container"> {children}</main>
+        <footer></footer>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -47,65 +57,4 @@ export function Layout({ children }) {
 
 export default function App() {
   return <Outlet />;
-}
-
-export function NavBar() {
-  return (
-    <nav className="navigation">
-      <ul>
-        <li>
-          <NavLink
-            to="/"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "normal",
-                color: isActive ? "red" : "black",
-              };
-            }}
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/posts"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: isActive ? "red" : "black",
-              };
-            }}
-          >
-            Posts
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/about"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: isActive ? "red" : "black",
-              };
-            }}
-          >
-            About
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/demo"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-                color: isActive ? "red" : "black",
-              };
-            }}
-          >
-            Demo
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
 }
