@@ -1,17 +1,19 @@
-import { useLoaderData } from "@remix-run/react";
-import posts from "../../data.json";
+import { useLoaderData, useMatches } from "@remix-run/react";
+
 import Post from "../components/Post";
 
 export async function loader({ params }) {
   const slug = params.slug;
 
-  const post = posts.find((item) => item.slug === slug);
-
-  return post;
+  return slug;
 }
 
 export default function SinglePost() {
-  const post = useLoaderData();
+  const slug = useLoaderData();
 
+  const matches = useMatches();
+
+  const posts = matches[1].data;
+  const post = posts.find((post) => post.slug === slug);
   return <Post post={post} />;
 }

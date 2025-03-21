@@ -6,6 +6,7 @@ import {
   useNavigate,
 } from "@remix-run/react";
 // import "../styles.css";
+import posts from "../../data.json";
 
 export const meta = () => {
   return [
@@ -13,6 +14,10 @@ export const meta = () => {
     { name: "Description", content: " welcome to all of out posts" },
   ];
 };
+
+export async function loader() {
+  return posts;
+}
 
 // export const meta = ({ matches }) => {
 //   const parentMeta = matches.flatMap((match) => match.meta ?? []);

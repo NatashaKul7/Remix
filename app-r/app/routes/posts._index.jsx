@@ -1,10 +1,10 @@
+import { useMatches } from "@remix-run/react";
 import PostsList from "../components/PostsList";
-import posts from "../../data.json";
-
-// export async function loader() {
-//   return posts;
-// }
 
 export default function PostsLandingPage() {
+  const matches = useMatches();
+
+  const posts = matches[1].data;
+
   return <PostsList posts={posts} />;
 }
